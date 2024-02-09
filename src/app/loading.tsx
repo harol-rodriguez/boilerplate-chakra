@@ -6,7 +6,6 @@ const HolaComp = () => {
 
 export default function Loading() {
   // Utiliza HolaComp como un componente JSX
-  console.log("[[[]]]]]]]]]")
   return (
     <HolaComp />
   );

@@ -1,4 +1,4 @@
-import { AlertProps, AvatarProps } from "@chakra-ui/react"
+import { AlertProps, AvatarProps, defineStyle } from "@chakra-ui/react"
 import { mode } from '@chakra-ui/theme-tools';
 import { buttonTheme } from "../components/button";
 import { modalTheme } from "../components/modal";
@@ -26,7 +26,7 @@ const components = {
   Button: buttonTheme,
   Container: {
     baseStyle: {
-      maxW: "container.xl",
+      // maxW: "container.xl",
       padding: {
         base: 0, // Padding en base
         md: 2, // Padding en md
@@ -34,11 +34,26 @@ const components = {
       },
     },
     sizes: {
-      sm: "container.sm",
-      md: "container.md",
-      lg: "container.lg",
-      xl: "container.xl",
+      sm: defineStyle({
+        maxW: 'container.sm',
+        p: '4',
+      }),
+      md: defineStyle({
+        maxW: 'container.md',
+        p: '6',
+      }),
+      lg: defineStyle({
+        maxW: 'container.lg',
+        p: '8',
+      }),
+      xl: defineStyle({
+        maxW: 'container.xl',
+        p: '8',
+      }),
     },
+    defaultProps: {
+      size: "xl",
+    }
   },
   Divider: {
     baseStyle: {
@@ -86,7 +101,12 @@ const components = {
         mt: 4,
         mb: 2,
       },
-      
+      '2xl': {
+        fontSize: "5xl",
+        lineHeight: "1.4",
+        mt: 4,
+        mb: 2,
+      },
     },
     defaultProps: {
       size: "h2",

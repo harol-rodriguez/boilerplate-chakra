@@ -1,23 +1,15 @@
+import { StyleFunctionProps } from "@chakra-ui/react";
+import { mode } from '@chakra-ui/theme-tools';
+
 const styles = {
-  global: {
-    "html, body": {
-      color: "white",
-      bg: "black",
-      lineHeight: "tall",
+
+  global: (props: StyleFunctionProps) => ({
+    body: {
+      color: mode('gray.500', 'whiteAlpha.900')(props),
+      bg: mode('white', 'gray.800')(props),
+      lineHeight: 'base',
     },
-    'html body *:focus-visible': { 
-      borderColor: "primary.800 !important",
-      boxShadow: "none !important",
-    },
-    a: {
-      color: "primary.500",
-    },
-    '.chakra-form-control input': {
-      background: 'transparent',
-      border: '1px solid',
-      borderColor: 'whiteAlpha.200',
-    },
-  },
+  }),
 }
 
 export default styles;

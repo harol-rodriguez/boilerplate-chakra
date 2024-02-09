@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Box, Flex, Heading, Button, HStack } from "@chakra-ui/react"
 import Link from "next/link";
+import Image from 'next/image'
 
 const MainNavBar = () => {
   const [show, setShow] = useState(true);
@@ -30,7 +31,6 @@ const MainNavBar = () => {
   return (
     <Box
       as="nav"
-      bg="gray.900"
       mb="16px"
       position="fixed"
       top="0"
@@ -38,17 +38,20 @@ const MainNavBar = () => {
       w="100%"
       transform={show ? 'translateY(0)' : 'translateY(-100%)'}
       transition="transform 0.3s ease-in-out"
+      borderBottom="2px solid"
+      borderColor="primary.100"
     >
       <Container py={4} px={{base: 4, md: 2}}>
         <Flex justify="space-between" align="center">
           <Link href="/">
-            <Heading as="h1" size="lg" id="brand_logo" color="white">Logo</Heading>
+            <Image src="/logo.svg" alt="logo-meteor-labs" width="148" height="56"></Image>
+            {/* <Heading as="h1" size="lg" id="brand_logo" color="primary.500">Logo</Heading> */}
           </Link>
 
           <HStack>
             <Link href="#">
               <Button py={{base: 3, md: 4}} minH="fit-content" w="140px">
-                Button
+                Start a Project
               </Button>
             </Link>
           </HStack>

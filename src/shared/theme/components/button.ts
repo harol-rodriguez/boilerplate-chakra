@@ -14,7 +14,7 @@ const baseStyle = {
 }
 
 // Variants
-const darkColorSchemes = ['gray', 'red', 'teal', 'blue'];
+const darkColorSchemes = ['gray', 'red', 'teal', 'blue', 'primary'];
 
 const outline = defineStyle((props) =>{
   const isDarkColorScheme = darkColorSchemes.includes(props.colorScheme);

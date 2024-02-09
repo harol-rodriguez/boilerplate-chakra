@@ -10,7 +10,7 @@ export function withMiddleware1(middleware: CustomMiddleware) {
   return async (request: NextRequest, event: NextFetchEvent) => {
     const pathname = request.nextUrl.pathname
     if (pathname === '/') {
-      console.log("++=+=++==+==++==+==++=+=++ middleware init ++=+=++==+==++==+==++=+=++")
+      // console.log("++=+=++==+==++==+==++=+=++ middleware init ++=+=++==+==++==+==++=+=++")
     }
     // The first middleware in the chain has to create the response
     // object and pass it down the chain.
