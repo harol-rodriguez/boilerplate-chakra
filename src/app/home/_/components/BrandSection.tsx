@@ -1,11 +1,13 @@
 'use client';
-import React, {  } from 'react';
+import React, { useRef } from 'react';
 import { useKeenSlider } from 'keen-slider/react';
 import 'keen-slider/keen-slider.min.css';
-import { Box, Flex } from '@chakra-ui/react';
+import { Box, Flex, Image } from '@chakra-ui/react';
+import { useAnimation, motion, useScroll, useTransform } from 'framer-motion';
 
-const animation = { duration: 5000, easing: (t: number) => t }
+const animation = { duration: 10000, easing: (t: number) => t }
 
+const MotionBox = motion(Box);
 const BrandSection = () => {
   const [sliderRef] = useKeenSlider<HTMLDivElement>({
     mode: 'free-snap',
@@ -30,8 +32,12 @@ const BrandSection = () => {
       {
         brands.map((d,i) => (
           <Box 
-          className="keen-slider__slide"
-          key={i} maxW="200px" h="80px" bg="blackAlpha.300"/>
+            className="keen-slider__slide"
+            key={i} 
+            style={{ width: '300px', height: '80px', backgroundColor: 'blackAlpha.300' }}
+          >
+            <BrandSlide />
+          </Box>
         ))
       }
     </Flex>
@@ -78,3 +84,19 @@ const brands = [
     image: undefined
   },
 ]
+
+const BrandSlide = ({ index }:any) => {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["end end", "start start"]
+  });
+
+  const scale = useTransform(scrollYProgress, [0, 0.25, 0.5, 1], [0.4, 1, 0.7, 0.4]);
+
+  return (
+    <MotionBox ref={ref} style={{ scale }} opacity="0.5">
+      <Image alt="vercel" src="/vercel.svg" />
+    </MotionBox>
+  );
+};

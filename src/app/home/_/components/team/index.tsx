@@ -5,6 +5,7 @@ import 'keen-slider/keen-slider.min.css';
 import { Box, Flex, HStack, Image, Skeleton, Text, VStack, useBreakpointValue } from '@chakra-ui/react';
 import teamMembers from './team-members'; // Asume una lista de miembros del equipo
 import ProfileCard from './profile-card';
+import { useScroll, useSpring, useTransform } from 'framer-motion';
 
 const animation = { duration: 5000, easing: (t: number) => t }
 

@@ -16,6 +16,12 @@ export default function RootPage(props: any) {
       <QuoteSection />
       <AboutSection />
       <ProductsSection />
+      <AboutSection />
+      <ProductsSection />
+      <AboutSection />
+      <ProductsSection />
+      <AboutSection />
+      <ProductsSection />
     </Box>
   );
 }

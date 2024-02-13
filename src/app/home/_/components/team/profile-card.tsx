@@ -1,7 +1,7 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Box, Flex, Image, Text, VStack, Stack, BoxProps, Avatar, HStack } from '@chakra-ui/react';
-import { AnimationProps, motion, useAnimation } from 'framer-motion';
+import { AnimationProps, motion, useAnimation, useScroll, useSpring, useTransform } from 'framer-motion';
 
 interface ProfileCardProps extends BoxProps {
   name: string;
@@ -16,6 +16,7 @@ interface ProfileCardProps extends BoxProps {
 
 const MotionStack = motion(Stack);
 const MotionBox = motion(Box);
+const MotionImage = motion(Image);
 
 const ProfileCard: React.FC<ProfileCardProps> = ({
   name,
@@ -26,7 +27,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
 }) => {
 
   return (
-    <Stack
+    <MotionStack
       {...props}
     >
       <ProfileCardFlipComponent {...{ name, positionDescription, image, quote }}/>
@@ -43,7 +44,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
           {positionDescription}
         </Text>
       </Stack>
-    </Stack>
+    </MotionStack>
   );
 };
 
@@ -106,7 +107,6 @@ const ProfileCardFlipComponent = ({ name, positionDescription, image, quote }: a
           variants={opacityVariants}
           w="100%" h="100%"
           position="absolute"
-          rotateX={0}
         >
           <AvatarContent {...{ name, positionDescription, image, quote }}/>
         </MotionStack>
@@ -116,7 +116,6 @@ const ProfileCardFlipComponent = ({ name, positionDescription, image, quote }: a
           variants={opacityVariants}
           w="100%" h="100%"
           position="absolute"
-          rotateX={180}
           style={{ backfaceVisibility: 'hidden', rotateX: 180 }}
         >
           <HoveredContent {...{ name, positionDescription, image, quote }}/>
@@ -126,9 +125,22 @@ const ProfileCardFlipComponent = ({ name, positionDescription, image, quote }: a
   );
 };
 
-const AvatarContent = ({image, name}: any) => (
-  <Box bg="primary.100" h="100%">
-    <Image
+const AvatarContent = ({image, name}: any) => {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", `end 100px`],
+  });
+  const scale = useSpring(useTransform(scrollYProgress, [0, 1.3], [1, 0.4]), {
+    stiffness: 100,
+    damping: 30,
+  });
+  const opacity = useTransform(scrollYProgress, [0, 0.25, 0.8, 1], [0.4, 1, 0.7, 0]);
+
+  return (
+  <Box bg="primary.100" h="100%" ref={ref}>
+    <MotionImage
+      style={{ scale, opacity }}
       src={`/img/metmojis/${image}`}
       alt={name}
       h="110%"
@@ -136,7 +148,7 @@ const AvatarContent = ({image, name}: any) => (
     />
   </Box>
 )
-
+}
 const HoveredContent = ({image, name, quote}: any) => (
   <Stack
     w="100%"

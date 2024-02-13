@@ -1,9 +1,38 @@
 'use client';
 import { Box, Container, Text, Image, Flex, HStack, Stack } from '@chakra-ui/react';
+import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
+
+const MotionBox = motion(Box);
+const MotionImage = motion(Image);
+
+const imageVariants = {
+  offscreen: {
+    scale: 1.4,
+    opacity: 0,
+  },
+  onscreen: {
+    scale: 1,
+    opacity: 1,
+    transition: {
+      scale: {
+        duration: 0.8,
+        stiffness: 100,
+        damping: 30,
+      },
+      opacity: {
+        duration: 0.5,
+      },
+    },
+  },
+};
 
 const QuoteSection = () => {
   return (
-    <Box py={20}>
+    <MotionBox py={20}
+      initial="offscreen"
+      whileInView="onscreen"
+      viewport={{ once: false, amount: 0.6 }}
+    >
       <Container as="section" bg="primary.100" borderRadius="lg" py={8} px={14}>
         <HStack spacing="8">
           <Stack flex="1" gap={5}>
@@ -21,12 +50,18 @@ const QuoteSection = () => {
             </HStack>
           </Stack>
 
-          <Box maxW="437px" bg="white" borderRadius="xl">
-            <Image src={`/img/metmojis/Fabian.gif`} alt={"Fabian CEO"} h="130%" />
-          </Box>
+          
+          <MotionBox maxW="437px" bg="white" borderRadius="xl">
+            <MotionImage
+              variants={imageVariants}
+              src={`/img/metmojis/Fabian.gif`}
+              alt={"Fabian CEO"} h="130%"
+              objectFit="cover"
+            />
+          </MotionBox>
         </HStack>
       </Container>
-    </Box>
+    </MotionBox>
   );
 };
 

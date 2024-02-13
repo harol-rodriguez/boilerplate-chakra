@@ -13,7 +13,7 @@ const HeroSection = () => {
   const [isPageLoaded, setIsPageLoaded] = useState(false);
 
   useEffect(() => {
-    // setIsPageLoaded(true);
+    setIsPageLoaded(true);
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % heroTextAnimation.length);
     }, 10000);
