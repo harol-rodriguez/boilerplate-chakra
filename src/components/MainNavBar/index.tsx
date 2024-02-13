@@ -36,6 +36,7 @@ const MainNavBar = () => {
       top="0"
       zIndex="1"
       w="100%"
+      bg="white"
       transform={show ? 'translateY(0)' : 'translateY(-100%)'}
       transition="transform 0.3s ease-in-out"
       borderBottom="2px solid"

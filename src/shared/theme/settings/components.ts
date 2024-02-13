@@ -1,8 +1,10 @@
-import { AlertProps, AvatarProps, defineStyle } from "@chakra-ui/react"
+import { AlertProps, AvatarProps, cssVar, defineStyle } from "@chakra-ui/react"
 import { mode } from '@chakra-ui/theme-tools';
 import { buttonTheme } from "../components/button";
 import { modalTheme } from "../components/modal";
 
+const $startColor = cssVar('skeleton-start-color')
+const $endColor = cssVar('skeleton-end-color')
 const components = {
   // Avatar: {
   //   baseStyle: (props: AvatarProps) => {
@@ -27,11 +29,11 @@ const components = {
   Container: {
     baseStyle: {
       // maxW: "container.xl",
-      padding: {
-        base: 0, // Padding en base
-        md: 2, // Padding en md
-        lg: 4, // Padding en lg
-      },
+      // padding: {
+      //   base: 0, // Padding en base
+      //   md: 2, // Padding en md
+      //   lg: 4, // Padding en lg
+      // },
     },
     sizes: {
       sm: defineStyle({
@@ -58,6 +60,18 @@ const components = {
   Divider: {
     baseStyle: {
       borderColor: 'whiteAlpha.500',
+    }
+  },
+  Skeleton: {
+    baseStyle: {
+      _light: {
+        [$startColor.variable]: 'colors.primary.100', //changing startColor to red.100
+        [$endColor.variable]: 'colors.primary.200', // changing endColor to red.400
+      },
+      _dark: {
+        [$startColor.variable]: 'colors.red.800', //changing startColor to red.800
+        [$endColor.variable]: 'colors.red.600', // changing endColor to red.600
+      },
     }
   },
   FormLabel: {

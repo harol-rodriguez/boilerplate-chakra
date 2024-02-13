@@ -1,7 +1,6 @@
-import { Credentials } from '../entities/interfaces/credentials.interface';
 import { mapAuthResponse } from '../entities/mappers/auth.mapper';
 
-export const authenticate = async ({ username, password }: Credentials) => {
+export const authenticate = async ({ username, password }: any) => {
   try {
     // Simular una respuesta de autenticación que coincida con AuthResponse
     const mockResponse = {
