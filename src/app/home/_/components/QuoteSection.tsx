@@ -28,14 +28,14 @@ const imageVariants = {
 
 const QuoteSection = () => {
   return (
-    <MotionBox py={20}
+    <MotionBox
       initial="offscreen"
       whileInView="onscreen"
       viewport={{ once: false, amount: 0.6 }}
     >
       <Container as="section" bg="primary.100" borderRadius="lg" py={8} px={14}>
         <HStack spacing="8">
-          <Stack flex="1" gap={5}>
+          <Stack flex="1" gap={5} px="3">
             <Text fontSize={"2xl"} fontStyle="italic" fontWeight="bold" lineHeight="1.8" letterSpacing="0.51px">
               “Dive into a realm where the future is being forged today. Join us in exploring groundbreaking technologies that are shaping a new tomorrow of Lima.”
             </Text>

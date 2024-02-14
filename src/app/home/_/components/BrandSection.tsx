@@ -5,7 +5,7 @@ import 'keen-slider/keen-slider.min.css';
 import { Box, Flex, Image } from '@chakra-ui/react';
 import { useAnimation, motion, useScroll, useTransform } from 'framer-motion';
 
-const animation = { duration: 10000, easing: (t: number) => t }
+const animation = { duration: 20000, easing: (t: number) => t }
 
 const MotionBox = motion(Box);
 const BrandSection = () => {
@@ -28,7 +28,7 @@ const BrandSection = () => {
     },
   })
   return (
-    <Flex as="section" ref={sliderRef} className="keen-slider" py={100}>
+    <Flex as="section" ref={sliderRef} className="keen-slider" py={20}>
       {
         brands.map((d,i) => (
           <Box 

@@ -10,10 +10,10 @@ const MotionHeading = motion(Heading);
 
 const HeroSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isPageLoaded, setIsPageLoaded] = useState(false);
+  // const [isPageLoaded, setIsPageLoaded] = useState(false);
 
   useEffect(() => {
-    setIsPageLoaded(true);
+    // setIsPageLoaded(true);
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % heroTextAnimation.length);
     }, 10000);
@@ -31,7 +31,7 @@ const HeroSection = () => {
   }, 'letter');
 
   return (
-    <Box as="section">
+    <Box as="section" pb={20}>
       <Container size="md">
         <Stack align="center">
           <AnimatePresence  mode="wait">

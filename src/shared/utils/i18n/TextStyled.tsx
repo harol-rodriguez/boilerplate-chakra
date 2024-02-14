@@ -14,7 +14,7 @@ interface AnimationOptions {
   exit?: Variants;
 }
 
-export const getTextStyled = (text: string, stylesMap: { [x: string]: {}; }) => {
+export const getTextStyled = (text: string, stylesMap: { [x: string]: {}; } = {color: 'primary.500'}) => {
   const regex = /\[([^\]]+)\]\(#(.*?)\)/g;
 
   let parts = [];
@@ -52,7 +52,9 @@ export const getTextStyled = (text: string, stylesMap: { [x: string]: {}; }) => 
   return <>{parts}</>;
 };
 
-export const getChakraTextStyled = (text: string, stylesMap: StyleMap): JSX.Element => {
+export const getChakraTextStyled = (text: string, stylesMap?: { [key: string]: any } | undefined): JSX.Element => {
+  const effectiveStylesMap = stylesMap || { style: { color: 'primary.500' } };
+
   const regex = /\[([^\]]+)\]\(#(.*?)\)/g;
   let parts: JSX.Element[] = [];
   let lastIndex = 0;
@@ -64,7 +66,8 @@ export const getChakraTextStyled = (text: string, stylesMap: StyleMap): JSX.Elem
     }
 
     const [wholeMatch, matchedText, styleId] = match;
-    const styleProps = stylesMap[styleId] || {};
+
+    const styleProps = effectiveStylesMap[styleId];
 
     parts.push(
       <Box as="span" key={`styled-${lastIndex}`} {...styleProps}>

@@ -1,6 +1,8 @@
 
 /* styles.css */
 @import '@fontsource/poppins/400.css'; /* Importa la fuente */
+@import '@fontsource/poppins/500.css'; /* Importa la fuente */
+@import '@fontsource/poppins/600.css'; /* Importa la fuente */
 
 /* :root {
 } */
@@ -14,6 +16,7 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;font-display: block;
+  -webkit-font-smoothing: antialiased;
 }
 
 html,
