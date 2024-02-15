@@ -28,10 +28,16 @@ const BrandSection = () => {
     },
   })
   return (
-    <Flex as="section" ref={sliderRef} className="keen-slider" py={20}>
+    <Flex
+      position="relative"
+      as="section"
+      ref={sliderRef}
+      className="keen-slider" py={20}
+    >
       {
         brands.map((d,i) => (
-          <Box 
+          <Box
+            position="relative"
             className="keen-slider__slide"
             key={i} 
             style={{ width: '300px', height: '80px', backgroundColor: 'blackAlpha.300' }}
@@ -95,7 +101,7 @@ const BrandSlide = ({ index }:any) => {
   const scale = useTransform(scrollYProgress, [0, 0.25, 0.5, 1], [0.4, 1, 0.7, 0.4]);
 
   return (
-    <MotionBox ref={ref} style={{ scale }} opacity="0.5">
+    <MotionBox ref={ref} style={{ scale }} opacity="0.5" position="relative">
       <Image alt="vercel" src="/vercel.svg" />
     </MotionBox>
   );

@@ -34,18 +34,18 @@ const MainNavBar = () => {
       mb="16px"
       position="fixed"
       top="0"
-      zIndex="1"
+      zIndex="9"
       w="100%"
-      bg="white"
+      bg="whiteAlpha.800"
       transform={show ? 'translateY(0)' : 'translateY(-100%)'}
       transition="transform 0.3s ease-in-out"
-      borderBottom="2px solid"
-      borderColor="primary.100"
+      backdropFilter="blur(100px)"
+      boxShadow="0px 1px 5px var(--chakra-colors-blackAlpha-200)"
     >
       <Container py={4} px={{base: 4, md: 2}}>
         <Flex justify="space-between" align="center">
           <Link href="/">
-            <Image src="/logo.svg" alt="logo-meteor-labs" width="148" height="56"></Image>
+            <Image src="/logo.svg" priority={true} alt="logo-meteor-labs" width="148" height="56"></Image>
             {/* <Heading as="h1" size="lg" id="brand_logo" color="primary.500">Logo</Heading> */}
           </Link>
 

@@ -31,7 +31,9 @@ const HeroSection = () => {
   }, 'letter');
 
   return (
-    <Box as="section" pb={20}>
+    <Box
+      as="section" pb={20} pt="24"
+    >
       <Container size="md">
         <Stack align="center">
           <AnimatePresence  mode="wait">

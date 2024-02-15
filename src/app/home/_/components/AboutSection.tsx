@@ -12,7 +12,7 @@ const AboutSection = () => {
 
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({ target: ref });
-  const transform = useTransform(scrollYProgress, [0, 0.75, 1], [0, 0.6, 0.43]);
+  const transform = useTransform(scrollYProgress, [0, 0.75, 1], [0, 0.37, 0.33]);
   const scale = useSpring(transform, {
     stiffness: 100,
     damping: 30,
@@ -27,7 +27,12 @@ const AboutSection = () => {
   });
 
   return (
-    <Container as="section" pt={40} ref={ref}>
+    <Container 
+      as="section"
+      position="relative"
+      pt={40} 
+      ref={ref}
+    >
       <Stack pb="8" gap ='0' position="relative" mt="20" >
         <MotionBox style={{ y }} left="0" zIndex="1" position="absolute">
           <Heading size="h2">{styledText}</Heading>

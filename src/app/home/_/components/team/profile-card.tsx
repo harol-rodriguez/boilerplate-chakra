@@ -138,7 +138,8 @@ const AvatarContent = ({image, name}: any) => {
   const opacity = useTransform(scrollYProgress, [0, 0.25, 0.8, 1], [0.4, 1, 0.7, 0]);
 
   return (
-  <Box bg="primary.100" h="100%" ref={ref}>
+  <Box bg="primary.100" h="100%" ref={ref}
+  position="relative">
     <MotionImage
       style={{ scale, opacity }}
       src={`/img/metmojis/${image}`}
