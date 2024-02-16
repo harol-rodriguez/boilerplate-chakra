@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Box, Flex, Heading, Button, HStack } from "@chakra-ui/react"
 import Link from "next/link";
 import Image from 'next/image'
+import XButton from '@/shared/components/UI/XButton';
 
 const MainNavBar = () => {
   const [show, setShow] = useState(true);
@@ -51,9 +52,11 @@ const MainNavBar = () => {
 
           <HStack>
             <Link href="#">
-              <Button py={{base: 3, md: 4}} minH="fit-content" w="140px">
-                Start a Project
-              </Button>
+              <XButton>
+                <Button py={{base: 3, md: 4}} minH="fit-content" w="140px">
+                  Start a Project
+                </Button>
+              </XButton>
             </Link>
           </HStack>
 

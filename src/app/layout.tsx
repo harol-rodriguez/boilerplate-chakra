@@ -6,6 +6,7 @@ import QueryProviders from '@/shared/providers/query-provider';
 import MainNavBar from "@/components/MainNavBar";
 import { cookies } from "next/headers";
 import { Box } from "@chakra-ui/react";
+import MainFooter from "@/components/MainFooter";
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -30,6 +31,7 @@ export default function RootLayout({
               <Box mt="106">
                 {children}
               </Box>
+              <MainFooter />
           </ThemeProvider>
         </QueryProviders>
       </body>

@@ -1,5 +1,5 @@
 'use client';
-import { Box, Container, Flex, Text, Heading } from '@chakra-ui/react';
+import { Box, Container, Flex, Text, Heading, Grid, GridItem, Stack } from '@chakra-ui/react';
 import { MotionValue, useTransform, useScroll, motion, useSpring } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 
@@ -53,6 +53,18 @@ const ProductsSection = () => {
     offset: ["start end", "end end"],
   });
 
+  const transform = useTransform(scrollYProgress, [0, 0.75, 1], [0, 0.37, 0.33]);
+  const scale = useSpring(transform, {
+    stiffness: 100,
+    damping: 30,
+  });
+  const y = useParallax(scale, 120);
+  const ImgY = useParallax(useSpring(
+    useTransform(scrollYProgress, [0, 0.75, 1], [1, 0.37, 0]), {
+    stiffness: 100,
+    damping: 30,
+  }), 140);
+
   const scaleX = scrollYProgress
   // useSpring(scrollYProgress, {
   //   stiffness: 100,
@@ -63,6 +75,11 @@ const ProductsSection = () => {
     scrollYProgress,
     [0, 0.999, 1],
     [1, 1, 0]
+  )
+  const ImgOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.45, 0.7],
+    [0, 0, 1]
   )
   
   // useSpring(scrollYProgress, {
@@ -82,34 +99,10 @@ const ProductsSection = () => {
 
   useEffect(()=> {
     setInnerWidth(window.innerWidth)
-    const handleScroll = (e:any) => {
-      // Prevent default scroll behavior
-      e.preventDefault();
-      
-      // Adjust the deltaY for a slower scroll effect
-      const slowerScrollSpeed = e.deltaY * 0.45;
-      const scrollTo = window.scrollY + slowerScrollSpeed;
-
-      // Apply the adjusted scroll
-      // window.scrollBy(0, slowerScrollSpeed);
-      window.scrollTo({
-        top: scrollTo,
-        behavior: 'smooth' // Esto hace que el scroll sea suave
-      });
-    };
-
-    // Identify your specific section where you want to apply the slow scroll
-    const section = document.getElementById('slow-scroll-section');
-    
-    // Add event listener
-    section?.addEventListener('wheel', handleScroll, { passive: false });
-
-    // Cleanup event listener
-    return () => section?.removeEventListener('wheel', handleScroll);
   }, [])
   
   return (
-    <Flex as="section" py={100} pt="150px" bg="gray.800" position="relative" justify="center" ref={serviceSectionRef}>
+    <Flex as="section" pt={200} pb="0" bg="gray.800" position="relative" justify="center" ref={serviceSectionRef} overflow="hidden">
       <Flex
         w="120%"
         h="80px"
@@ -119,13 +112,21 @@ const ProductsSection = () => {
         top="-42px"
       />
       
-      <Container textAlign="center" color="white" position="relative" id="slow-scroll-section">
-        <Heading size="3xl" fontWeight="400" lineHeight="1.5">We shape the products and services that improve the lives of millions every single day.</Heading>
-        <Text fontSize="xl" color="whiteAlpha.800" pt="4" mb="30">We do this by following a simple approach.</Text>
+      <Container textAlign="center" color="white" position="relative" id="slow-scroll-section" pb="0">
+        <MotionBox style={{ y }} left="0" zIndex="1" position="absolute">
+          <Heading size="3xl" fontWeight="400" lineHeight="1.5">We shape the products and services that improve the lives of millions every single day.</Heading>
+          <Text fontSize="xl" color="whiteAlpha.800" pt="4" mb="30">We do this by following a simple approach.</Text>
+        </MotionBox>
+        <Box mt="390px"></Box>
+        
+        <Grid templateColumns='repeat(3, 1fr)' gap={6}>
+          {services.map((d, i)=> (
+            <GridItem key={i} w='100%'>
+              <ItemSection  {...{...d,  y: ImgY, opacity: ImgOpacity}}/>
+            </GridItem>
+          ))}
+        </Grid>
 
-        {services.map((d, i)=> (
-            <ItemSection key={i} />
-        ))}
       </Container>
       <MotionBox position="fixed" bottom="0" left="0" w="100%" h="10px" bg="white" zIndex="1" style={{ scaleX, opacity }} />
     </Flex>
@@ -134,15 +135,25 @@ const ProductsSection = () => {
 
 export default ProductsSection;
 
-const ItemSection = () => {
+const ItemSection = ({img: SvgIcon, ...props}: any) => {
   return (
-    <Flex h="50vh"  align="center">
-      <MotionBox 
-        position="relative"
-        bg="whiteAlpha.400" 
-        h="400px" w="300px"
-      >
-      </MotionBox>
-    </Flex>
+    <MotionBox 
+      position="relative" style={{ opacity: props.opacity,  y: props. y }} 
+      textAlign="left"
+      bg="gray.800"
+      border="1px solid"
+      borderColor="whiteAlpha.300"
+      borderRadius="40"
+      h="100%"
+      whileHover={{ scale: 1.15, zIndex: 1 }}
+      whileTap={{ scale: 0.98, zIndex: 1 }}
+      transition={{ type: "spring", stiffness: 400, damping: 17 }}
+    >
+      <Stack h="50vh" minH="400px" justify="center" align="center" p="10">
+        <SvgIcon height="172px" width="300px"/>
+        <Heading as="h4" fontSize="24px" color="whiteAlpha.9w00">#{props.title}</Heading>
+        <Text color="whiteAlpha.700">{props.text}</Text>
+      </Stack>
+    </MotionBox>
   )
 }

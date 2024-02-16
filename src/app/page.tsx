@@ -5,6 +5,12 @@ import QuoteSection from "./home/_/components/QuoteSection";
 import AboutSection from "./home/_/components/AboutSection";
 import LoadingSpinner from "./home/_/components/LoadingSpinner";
 import ProductsSection from "./home/_/components/ProductsSection";
+import StackSection from "./home/_/components/StackSection";
+import RecentProductsSection from "./home/_/components/RecentProductsSection";
+import OurProductsSection from "./home/_/components/OurProductsSection";
+import InnovationBanner from "./home/_/components/InnovationBanner";
+import BlogSection from "./home/_/components/BlogSection";
+import CompanyInfoSection from "./home/_/components/CompanyInformation";
 
 export default function RootPage(props: any) {
 
@@ -16,6 +22,12 @@ export default function RootPage(props: any) {
       <QuoteSection />
       <AboutSection />
       <ProductsSection />
+      <StackSection />
+      <RecentProductsSection />
+      {/* <OurProductsSection /> */}
+      <BlogSection />
+      <InnovationBanner />
+      <CompanyInfoSection />
     </Box>
   );
 }
